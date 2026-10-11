@@ -1,0 +1,9 @@
+target/
+.DS_Store
+.vscode/
+.idea/
+*.iml
+*.log
+.env
+.env.*
+application-local.properties

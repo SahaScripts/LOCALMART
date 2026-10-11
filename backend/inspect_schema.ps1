@@ -1,0 +1,8 @@
+$env:PGPASSWORD = "arnadeep"
+$psql = "C:\Program Files\PostgreSQL\18\bin\psql.exe"
+& $psql -U postgres -d local_marketplace -c "\dt"
+& $psql -U postgres -d local_marketplace -c "\d businesses"
+& $psql -U postgres -d local_marketplace -c "\d orders"
+& $psql -U postgres -d local_marketplace -c "\d order_items"
+& $psql -U postgres -d local_marketplace -c "\d products"
+& $psql -U postgres -d local_marketplace -c "\df+ place_order"

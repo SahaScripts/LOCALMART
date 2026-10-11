@@ -1,0 +1,58 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+.output
+.vinxi
+.tanstack/**
+.nitro
+*.local
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# Java / Maven
+target/
+**/target/
+*.class
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local Spring Boot configuration
+application-local.properties
+**/application-local.properties
+# Java / Maven build output
+backend/target/
+**/target/
+
+# Uploaded user documents
+backend/uploads/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+backend/src/main/resources/application-local.properties
+backend/startup-error.txt

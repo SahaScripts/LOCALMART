@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalMarket — Smart Hyperlocal Marketplace & Analytics</title>
+  <meta name="description" content="Production-ready local marketplace connecting neighborhood sellers, customers, and data-driven store analytics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Global Header Navigation -->
+  <header class="topbar">
+    <div class="container nav-container">
+      <div class="nav-left">
+        <button class="brand" data-page="home" aria-label="LocalMarket Home">
+          <span class="brand-badge">LM</span>
+          <span class="brand-text">Local<strong>Market</strong></span>
+        </button>
+      </div>
+
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <button class="nav-link active" data-page="home"><span class="icon">🏠</span> Home</button>
+        <button class="nav-link" data-page="shop"><span class="icon">🛒</span> Shop</button>
+        <button class="nav-link" data-page="businesses"><span class="icon">🏪</span> Businesses</button>
+        <button class="nav-link" data-page="orders"><span class="icon">📦</span> Orders</button>
+        <button class="nav-link" data-page="seller"><span class="icon">💼</span> Seller Portal</button>
+        <button class="nav-link" data-page="reports"><span class="icon">📊</span> Analytics & Reports</button>
+        <button class="nav-link" data-page="admin" id="admin-nav-item"><span class="icon">⚙️</span> Admin</button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="action-btn cart-pill" data-page="cart" title="Shopping Cart">
+          <span class="cart-icon">🛍️</span>
+          <span class="cart-label">Cart</span>
+          <span id="cart-count" class="badge-count">0</span>
+        </button>
+
+        <button class="user-pill" id="user-switcher-btn" title="Switch Demo Account">
+          <span class="user-avatar-mini" id="user-avatar-initials">G</span>
+          <div class="user-info-text">
+            <span class="user-name-label" id="user-name-display">Guest</span>
+            <span class="user-role-badge role-CUSTOMER" id="user-role-display">CUSTOMER</span>
+          </div>
+          <span class="arrow-down">▾</span>
+        </button>
+
+        <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-drawer" class="mobile-drawer hidden">
+      <div class="mobile-nav-links">
+        <button class="mobile-nav-link" data-page="home">🏠 Home</button>
+        <button class="mobile-nav-link" data-page="shop">🛒 Shop Marketplace</button>
+        <button class="mobile-nav-link" data-page="businesses">🏪 Local Businesses</button>
+        <button class="mobile-nav-link" data-page="cart">🛍️ View Cart (<span id="cart-count-mobile">0</span>)</button>
+        <button class="mobile-nav-link" data-page="orders">📦 Order History</button>
+        <button class="mobile-nav-link" data-page="seller">💼 Seller Center</button>
+        <button class="mobile-nav-link" data-page="reports">📊 Analytics & Reports</button>
+        <button class="mobile-nav-link" data-page="admin">⚙️ Admin Control Center</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="container main-content">
+
+    <!-- PAGE 1: HOME LANDING -->
+    <section id="page-home" class="page-view">
+      <div class="hero-section">
+        <div class="hero-left">
+          <div class="tag-pill">🌱 HYPERLOCAL COMMERCE &amp; DIRECT SUPPLY</div>
+          <h1 class="hero-title">Support local artisans.<br><span class="gradient-text">Shop your neighborhood.</span></h1>
+          <p class="hero-subtitle">Connect directly with verified local bakeries, craft studios, and specialty shops. Real-time availability, zero middlemen, and instant local fulfillment.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-lg" data-page="shop">Start Shopping →</button>
+            <button class="btn btn-outline btn-lg" data-page="businesses">Explore Local Stores</button>
+            <button class="btn btn-ghost btn-lg" data-page="reports">📈 View Analytics</button>
+          </div>
+          <div class="hero-stats-row">
+            <div class="hero-stat">
+              <strong id="stat-product-count">0</strong>
+              <span>Products Available</span>
+            </div>
+            <div class="hero-stat-sep"></div>
+            <div class="hero-stat">
+              <strong id="stat-business-count">0</strong>
+              <span>Verified Stores</span>
+            </div>
+            <div class="hero-stat-sep"></div>
+            <div class="hero-stat">
+              <strong id="stat-orders-count">0</strong>
+              <span>Orders Completed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-showcase-card glass-panel">
+            <div class="showcase-header">
+              <span class="live-dot"></span>
+              <span>LIVE MARKETPLACE RADAR</span>
+            </div>
+            <div class="showcase-body">
+              <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <div>
+                  <strong>PostgreSQL Stored Procedures</strong>
+                  <p>Atomic checkout with automated inventory locking and order fulfillment.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <div>
+                  <strong>Executive BI Views</strong>
+                  <p>Instant analytics for customer lifetime spend, ratings, and seller performance.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">📦</div>
+                <div>
+                  <strong>Smart Restock Engine</strong>
+                  <p>Daily demand forecasting &amp; 60-day velocity-based inventory alerts.</p>
+                </div>
+              </div>
+            </div>
+            <div class="showcase-footer">
+              <button class="btn btn-sm btn-primary full-btn" data-page="seller">Enter Seller Portal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Section -->
+      <div class="section-header">
+        <div>
+          <span class="section-tag">POPULAR DEPARTMENTS</span>
+          <h2 class="section-title">Shop by Category</h2>
+        </div>
+        <button class="btn-link" data-page="shop">Browse all items →</button>
+      </div>
+      <div id="home-categories-grid" class="categories-grid"></div>
+
+      <!-- Featured Products Section -->
+      <div class="section-header mt-8">
+        <div>
+          <span class="section-tag">TRENDING TODAY</span>
+          <h2 class="section-title">Fresh from Local Sellers</h2>
+        </div>
+        <button class="btn-link" data-page="shop">View full catalog →</button>
+      </div>
+      <div id="home-products-grid" class="products-grid"></div>
+    </section>
+
+    <!-- PAGE 2: MARKETPLACE / SHOP -->
+    <section id="page-shop" class="page-view hidden">
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <span class="section-tag">MARKETPLACE CATALOG</span>
+          <h1>Explore Local Products</h1>
+          <p>Discover handcrafted and fresh goods. Real-time availability verified directly with neighborhood sellers.</p>
+        </div>
+        <div class="page-hero-actions">
+          <button class="btn btn-outline" id="check-availability-modal-btn">🔍 Check Live Availability</button>
+        </div>
+      </div>
+
+      <!-- Filters Toolbar -->
+      <div class="filters-card glass-panel">
+        <div class="filter-row">
+          <div class="input-icon-wrap search-box">
+            <span class="input-icon">⌕</span>
+            <input type="text" id="shop-search" placeholder="Search by name, seller, or keywords…">
+          </div>
+          <div class="filter-select-wrap">
+            <select id="shop-category-filter">
+              <option value="">All Categories</option>
+            </select>
+          </div>
+          <div class="filter-input-wrap">
+            <input type="text" id="shop-city-filter" placeholder="Filter by City (e.g. Vellore, Chennai)">
+          </div>
+          <div class="filter-select-wrap">
+            <select id="shop-sort-filter">
+              <option value="featured">Sort: Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="stock">In Stock First</option>
+            </select>
+          </div>
+          <div class="filter-btn-group">
+            <button class="btn btn-primary" id="shop-apply-btn">Search</button>
+            <button class="btn btn-ghost" id="shop-reset-btn">Reset</button>
+          </div>
+        </div>
+
+        <!-- Quick Category Chips -->
+        <div id="shop-category-chips" class="category-chips-row"></div>
+      </div>
+
+      <div class="results-bar">
+        <span id="shop-results-count" class="results-count">Loading products…</span>
+        <div class="results-actions">
+          <label class="toggle-control">
+            <input type="checkbox" id="shop-in-stock-only">
+            <span>In-stock only</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="shop-products-grid" class="products-grid"></div>
+    </section>
+
+    <!-- PAGE 3: BUSINESSES DIRECTORY -->
+    <section id="page-businesses" class="page-view hidden">
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <span class="section-tag">COMMUNITY VENDORS</span>
+          <h1>Neighborhood Businesses</h1>
+          <p>Meet the local artisans, bakers, and retailers powering your community marketplace.</p>
+        </div>
+        <div class="page-hero-actions">
+          <button class="btn btn-primary" id="register-business-btn">+ Register Business</button>
+        </div>
+      </div>
+
+      <div class="filters-card glass-panel">
+        <div class="filter-row">
+          <div class="input-icon-wrap search-box">
+            <span class="input-icon">⌕</span>
+            <input type="text" id="business-search-input" placeholder="Search by store name, owner, city, or phone…">
+          </div>
+          <div class="filter-select-wrap">
+            <select id="business-city-filter">
+              <option value="">All Cities</option>
+            </select>
+          </div>
+          <button class="btn btn-ghost" id="business-reset-btn">Reset</button>
+        </div>
+      </div>
+
+      <div class="results-bar">
+        <span id="business-results-count" class="results-count">Loading businesses…</span>
+      </div>
+
+      <div id="businesses-grid" class="businesses-grid"></div>
+    </section>
+
+    <!-- PAGE 4: CART & CHECKOUT -->
+    <section id="page-cart" class="page-view hidden">
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <span class="section-tag">SHOPPING CART</span>
+          <h1>Your Active Cart</h1>
+          <p>Review items, adjust quantities, and checkout with transactional inventory checks.</p>
+        </div>
+        <div class="page-hero-actions">
+          <button class="btn btn-ghost" data-page="shop">← Back to Shopping</button>
+        </div>
+      </div>
+
+      <div id="cart-content-container" class="cart-layout">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- PAGE 5: ORDERS TRACKING & REVIEWS -->
+    <section id="page-orders" class="page-view hidden">
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <span class="section-tag">CUSTOMER ORDERS</span>
+          <h1>My Orders &amp; Reviews</h1>
+          <p>Track delivery statuses, view item receipts, and leave verified ratings for your purchases.</p>
+        </div>
+        <div class="page-hero-actions">
+          <button class="btn btn-outline" id="refresh-orders-btn">🔄 Refresh Orders</button>
+          <button class="btn btn-primary" data-page="shop">Browse Products</button>
+        </div>
+      </div>
+
+      <!-- Orders Filter Tabs -->
+      <div class="sub-nav-tabs">
+        <button class="sub-tab-btn active" data-order-status="ALL">All Orders</button>
+        <button class="sub-tab-btn" data-order-status="PENDING">Pending</button>
+        <button class="sub-tab-btn" data-order-status="PROCESSING">Processing</button>
+        <button class="sub-tab-btn" data-order-status="SHIPPED">Shipped</button>
+        <button class="sub-tab-btn" data-order-status="DELIVERED">Delivered</button>
+        <button class="sub-tab-btn" data-order-status="CANCELLED">Cancelled</button>
+      </div>
+
+      <div id="orders-list-container" class="orders-list"></div>
+    </section>
+
+    <!-- PAGE 6: SELLER PORTAL -->
+    <section id="page-seller" class="page-view hidden">
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <span class="section-tag">SELLER MANAGEMENT</span>
+          <h1>Seller Merchant Portal</h1>
+          <p>Manage product listings, inventory levels, and monitor smart restock recommendations.</p>
+        </div>
+        <div class="page-hero-actions">
+          <button class="btn btn-primary" id="seller-add-product-btn">+ Add New Product</button>
+          <button class="btn btn-outline" id="seller-edit-business-btn">⚙️ Edit Store Info</button>
+        </div>
+      </div>
+
+      <!-- Seller Active Store Selector -->
+      <div class="store-selector-bar glass-panel" id="seller-store-bar">
+        <div class="store-selector-left">
+          <span class="store-icon">🏪</span>
+          <div>
+            <div class="store-sublabel">ACTIVE STORE CONTEXT</div>
+            <strong id="seller-current-store-name">Selecting store…</strong>
+          </div>
+        </div>
+        <div class="store-selector-right">
+          <select id="seller-store-dropdown" class="select-field"></select>
+          <button class="btn btn-sm btn-outline" id="seller-new-store-btn">+ New Business</button>
+        </div>
+      </div>
+
+      <!-- Seller Workspace Tabs -->
+      <div class="sub-nav-tabs">
+        <button class="sub-tab-btn active" data-seller-tab="products">📦 Product Catalog &amp; Stock</button>
+        <button class="sub-tab-btn" data-seller-tab="recommendations">💡 Smart Inventory Intelligence</button>
+        <button class="sub-tab-btn" data-seller-tab="profile">🏢 Business Profile</button>
+      </div>
+
+      <!-- Seller Tab 1: Products -->
+      <div id="seller-tab-products" class="seller-tab-content">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Store Products</h3>
+              <p class="muted">All items published under the active business.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="seller-add-product-inline-btn">+ Add Product</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="seller-products-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="seller-products-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seller Tab 2: Inventory Recommendations -->
+      <div id="seller-tab-recommendations" class="seller-tab-content hidden">
+        <div class="kpi-grid mb-6" id="seller-inventory-kpis">
+          <div class="kpi-card">
+            <span class="kpi-title">Catalog Size</span>
+            <strong class="kpi-value" id="kpi-seller-catalog-count">0</strong>
+            <span class="kpi-hint">Total SKUs in store</span>
+          </div>
+          <div class="kpi-card alert-warning">
+            <span class="kpi-title">Low Stock SKUs</span>
+            <strong class="kpi-value" id="kpi-seller-low-stock">0</strong>
+            <span class="kpi-hint">Reorder recommended</span>
+          </div>
+          <div class="kpi-card alert-success">
+            <span class="kpi-title">Healthy Stock</span>
+            <strong class="kpi-value" id="kpi-seller-healthy-stock">0</strong>
+            <span class="kpi-hint">Well-stocked items</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-title">Restock Required Units</span>
+            <strong class="kpi-value" id="kpi-seller-reorder-units">0</strong>
+            <span class="kpi-hint">Total suggested quantity</span>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Smart Restock &amp; Demand Recommendations</h3>
+              <p class="muted">Generated via backend <code>/api/inventory/recommendations/business/{id}</code> based on 60-day velocity.</p>
+            </div>
+            <button class="btn btn-outline btn-sm" id="refresh-recommendations-btn">🔄 Refresh Data</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="seller-recommendations-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Current Stock</th>
+                  <th>60d Units Ordered</th>
+                  <th>Avg Daily Demand</th>
+                  <th>Est. Days Left</th>
+                  <th>Inventory Status</th>
+                  <th>Suggested Reorder</th>
+                  <th>Recommendation Action</th>
+                </tr>
+              </thead>
+              <tbody id="seller-recommendations-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seller Tab 3: Business Profile -->
+      <div id="seller-tab-profile" class="seller-tab-content hidden">
+        <div id="seller-profile-card-container"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 7: EXECUTIVE ANALYTICS & REPORTS DASHBOARD -->
+    <section id="page-reports" class="page-view hidden">
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <span class="section-tag">EXECUTIVE INTELLIGENCE</span>
+          <h1>Reports &amp; Analytics Dashboard</h1>
+          <p>Real-time data feeds powered by SQL view projections across customers, catalog, ratings, and sellers.</p>
+        </div>
+        <div class="page-hero-actions">
+          <button class="btn btn-outline" id="reports-refresh-all-btn">🔄 Refresh All Feeds</button>
+          <button class="btn btn-ghost" id="reports-print-btn">🖨️ Print Report</button>
+        </div>
+      </div>
+
+      <!-- Top Level Analytics KPI Cards -->
+      <div class="kpi-grid mb-6">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">TOTAL PLATFORM SPEND</span>
+            <span class="kpi-badge">Gross</span>
+          </div>
+          <strong class="kpi-value" id="rep-kpi-total-spent">₹0.00</strong>
+          <span class="kpi-hint">Aggregated customer orders</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">ORDERS PLACED</span>
+            <span class="kpi-badge">Lifetime</span>
+          </div>
+          <strong class="kpi-value" id="rep-kpi-total-orders">0</strong>
+          <span class="kpi-hint">Delivered &amp; pending orders</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">UNITS SOLD</span>
+            <span class="kpi-badge">Fulfillment</span>
+          </div>
+          <strong class="kpi-value" id="rep-kpi-units-sold">0</strong>
+          <span class="kpi-hint">Total quantity purchased</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">AVG PRODUCT RATING</span>
+            <span class="kpi-badge">Satisfaction</span>
+          </div>
+          <strong class="kpi-value" id="rep-kpi-avg-rating">0.0 ★</strong>
+          <span class="kpi-hint">Across verified reviews</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-title">ACTIVE STORES</span>
+            <span class="kpi-badge">Sellers</span>
+          </div>
+          <strong class="kpi-value" id="rep-kpi-seller-count">0</strong>
+          <span class="kpi-hint">Registered businesses</span>
+        </div>
+      </div>
+
+      <!-- Reports Sub Tabs -->
+      <div class="sub-nav-tabs">
+        <button class="sub-tab-btn active" data-report-tab="customer-summary">👥 Customer Order Summary</button>
+        <button class="sub-tab-btn" data-report-tab="product-catalog">📦 Product Catalog Report</button>
+        <button class="sub-tab-btn" data-report-tab="product-performance">📈 Product Performance</button>
+        <button class="sub-tab-btn" data-report-tab="product-ratings">⭐ Product Ratings Report</button>
+        <button class="sub-tab-btn" data-report-tab="seller-performance">🏪 Seller Performance</button>
+      </div>
+
+      <!-- REPORT 1: Customer Order Summary -->
+      <div id="report-tab-customer-summary" class="report-content-panel">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Customer Order Summary (<code>/api/reports/customer-order-summary</code>)</h3>
+              <p class="muted">Lifetime orders, total units purchased, and gross spend per registered user.</p>
+            </div>
+            <span class="badge badge-emerald">SQL View: customer_order_summary</span>
+          </div>
+          <div id="customer-summary-chart-container" class="chart-wrapper mb-6"></div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Customer Name</th>
+                  <th>Total Orders</th>
+                  <th>Items Purchased</th>
+                  <th>Total Spent</th>
+                  <th>Avg Order Value</th>
+                </tr>
+              </thead>
+              <tbody id="customer-summary-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORT 2: Product Catalog -->
+      <div id="report-tab-product-catalog" class="report-content-panel hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Product Catalog Report (<code>/api/reports/product-catalog</code>)</h3>
+              <p class="muted">Consolidated catalog join of products, parent businesses, and category classification.</p>
+            </div>
+            <span class="badge badge-emerald">SQL View: product_catalog</span>
+          </div>
+          <div class="filter-row mb-4">
+            <div class="search-box">
+              <input type="text" id="report-catalog-search" placeholder="Filter report catalog…">
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Product</th>
+                  <th>Business / Seller</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Stock Quantity</th>
+                </tr>
+              </thead>
+              <tbody id="product-catalog-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORT 3: Product Performance -->
+      <div id="report-tab-product-performance" class="report-content-panel hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Product Sales Performance (<code>/api/reports/product-performance</code>)</h3>
+              <p class="muted">Units sold and total revenue generated per product ranked by revenue.</p>
+            </div>
+            <span class="badge badge-emerald">SQL View: product_performance</span>
+          </div>
+          <div id="product-performance-chart-container" class="chart-wrapper mb-6"></div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product ID</th>
+                  <th>Product Name</th>
+                  <th>Business Name</th>
+                  <th>Category</th>
+                  <th>Units Sold</th>
+                  <th>Gross Revenue</th>
+                  <th>Revenue Share</th>
+                </tr>
+              </thead>
+              <tbody id="product-performance-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORT 4: Product Ratings -->
+      <div id="report-tab-product-ratings" class="report-content-panel hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Product Ratings &amp; Reviews (<code>/api/reports/product-ratings</code>)</h3>
+              <p class="muted">Aggregated average score and verified review count across products.</p>
+            </div>
+            <span class="badge badge-emerald">SQL View: product_ratings</span>
+          </div>
+          <div id="product-ratings-chart-container" class="chart-wrapper mb-6"></div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Product Name</th>
+                  <th>Business Name</th>
+                  <th>Average Rating</th>
+                  <th>Review Count</th>
+                  <th>Rating Badge</th>
+                </tr>
+              </thead>
+              <tbody id="product-ratings-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORT 5: Seller Performance -->
+      <div id="report-tab-seller-performance" class="report-content-panel hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Seller Leaderboard (<code>/api/reports/seller-performance</code>)</h3>
+              <p class="muted">Cumulative order counts, items dispatched, and revenue per business entity.</p>
+            </div>
+            <span class="badge badge-emerald">SQL View: seller_performance</span>
+          </div>
+          <div id="seller-performance-chart-container" class="chart-wrapper mb-6"></div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Business ID</th>
+                  <th>Store / Business Name</th>
+                  <th>Total Orders</th>
+                  <th>Items Sold</th>
+                  <th>Gross Revenue</th>
+                </tr>
+              </thead>
+              <tbody id="seller-performance-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 8: ADMIN CONTROL CENTER -->
+    <section id="page-admin" class="page-view hidden">
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <span class="section-tag">SYSTEM ADMINISTRATION</span>
+          <h1>Admin Control Center</h1>
+          <p>Full CRUD management for Users, Categories, Businesses, Orders, Order Items, Reviews, and Carts.</p>
+        </div>
+        <div class="page-hero-actions">
+          <span class="role-badge role-ADMIN">Admin Access Active</span>
+        </div>
+      </div>
+
+      <!-- Admin Sub-Navigation -->
+      <div class="sub-nav-tabs">
+        <button class="sub-tab-btn active" data-admin-tab="users">👥 Users</button>
+        <button class="sub-tab-btn" data-admin-tab="categories">🏷️ Categories</button>
+        <button class="sub-tab-btn" data-admin-tab="businesses">🏪 Businesses</button>
+        <button class="sub-tab-btn" data-admin-tab="orders">📦 Orders</button>
+        <button class="sub-tab-btn" data-admin-tab="order-items">📋 Order Items</button>
+        <button class="sub-tab-btn" data-admin-tab="reviews">⭐ Reviews</button>
+        <button class="sub-tab-btn" data-admin-tab="carts">🛒 Carts Inspector</button>
+      </div>
+
+      <!-- Admin Tab: Users -->
+      <div id="admin-tab-users" class="admin-tab-content">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Users Directory (<code>/api/users</code>)</h3>
+              <p class="muted">Manage platform accounts across CUSTOMER, SELLER, and ADMIN roles.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="admin-create-user-btn">+ Create User</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Categories -->
+      <div id="admin-tab-categories" class="admin-tab-content hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Categories (<code>/api/categories</code>)</h3>
+              <p class="muted">Taxonomy and classification categories for products.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="admin-create-category-btn">+ Add Category</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Category Name</th>
+                  <th>Associated Products</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-categories-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Businesses -->
+      <div id="admin-tab-businesses" class="admin-tab-content hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Registered Businesses (<code>/api/businesses</code>)</h3>
+              <p class="muted">Seller business profiles, ownership links, and store contacts.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="admin-create-business-btn">+ Register Business</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Business Name</th>
+                  <th>Owner</th>
+                  <th>City / State</th>
+                  <th>Phone</th>
+                  <th>Postal Code</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-businesses-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Orders -->
+      <div id="admin-tab-orders" class="admin-tab-content hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>All Platform Orders (<code>/api/orders</code>)</h3>
+              <p class="muted">Track, update lifecycle status, and inspect customer orders.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="admin-create-order-btn">+ Create Manual Order</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Shipping Address</th>
+                  <th>Items Count</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-orders-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Order Items -->
+      <div id="admin-tab-order-items" class="admin-tab-content hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Order Items Breakdown (<code>/api/order-items</code>)</h3>
+              <p class="muted">Direct management of itemized order rows, unit prices, and quantities.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="admin-create-order-item-btn">+ Add Order Item</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Line Total</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-order-items-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Reviews -->
+      <div id="admin-tab-reviews" class="admin-tab-content hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Customer Reviews (<code>/api/reviews</code>)</h3>
+              <p class="muted">Manage, moderate, and edit star ratings and customer feedback.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="admin-create-review-btn">+ Add Review</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Review ID</th>
+                  <th>Product</th>
+                  <th>Order ID</th>
+                  <th>Rating</th>
+                  <th>Comment</th>
+                  <th>Review Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-reviews-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Carts Inspector -->
+      <div id="admin-tab-carts" class="admin-tab-content hidden">
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Active Shopping Carts (<code>/api/carts</code> &amp; <code>/api/cart-items</code>)</h3>
+              <p class="muted">Inspect in-flight carts and line items across all users.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="admin-create-cart-btn">+ Create Cart for User</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Cart ID</th>
+                  <th>User ID</th>
+                  <th>Customer Name</th>
+                  <th>Items in Cart</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-carts-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- User Switcher & Profile Modal -->
+  <div id="user-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">IDENTITY &amp; ROLES</span>
+          <h2 class="modal-title">Select Active Account</h2>
+        </div>
+        <button class="modal-close-btn" data-close="user-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="muted mb-4">Switch persona context to test permissions and data flows across <strong>CUSTOMER</strong>, <strong>SELLER</strong>, and <strong>ADMIN</strong> roles.</p>
+        
+        <div class="form-group mb-4">
+          <label class="form-label" for="user-select-dropdown">Choose Account</label>
+          <select id="user-select-dropdown" class="select-field full-width"></select>
+        </div>
+
+        <div id="selected-user-card" class="user-preview-card mb-4"></div>
+
+        <div class="modal-button-group">
+          <button class="btn btn-outline" id="user-modal-create-btn">+ Create New User</button>
+          <button class="btn btn-secondary" id="user-modal-edit-btn">Edit Profile</button>
+          <button class="btn btn-primary" id="user-modal-confirm-btn">Switch &amp; Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details & Reviews Modal -->
+  <div id="product-detail-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow" id="product-detail-category-badge">CATEGORY</span>
+          <h2 class="modal-title" id="product-detail-name">Product Name</h2>
+        </div>
+        <button class="modal-close-btn" data-close="product-detail-modal">✕</button>
+      </div>
+      <div class="modal-body" id="product-detail-body">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Form Modal (Create / Edit) -->
+  <div id="product-form-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">CATALOG INVENTORY</span>
+          <h2 class="modal-title" id="product-form-title">Add New Product</h2>
+        </div>
+        <button class="modal-close-btn" data-close="product-form-modal">✕</button>
+      </div>
+      <form id="product-form" class="modal-body">
+        <input type="hidden" id="product-form-id">
+        <div class="form-grid">
+          <div class="form-group full-col">
+            <label class="form-label">Product Name *</label>
+            <input type="text" id="product-form-name" class="input-field" required placeholder="e.g. Sourdough Loaf">
+          </div>
+          <div class="form-group full-col">
+            <label class="form-label">Description</label>
+            <textarea id="product-form-desc" class="textarea-field" rows="3" placeholder="Artisan made fresh daily…"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Store / Business *</label>
+            <select id="product-form-business" class="select-field" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select id="product-form-category" class="select-field" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Price (₹) *</label>
+            <input type="number" id="product-form-price" class="input-field" step="0.01" min="0" required placeholder="150.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stock Quantity *</label>
+            <input type="number" id="product-form-stock" class="input-field" min="0" required placeholder="25">
+          </div>
+        </div>
+        <div class="modal-footer mt-6">
+          <button type="button" class="btn btn-ghost" data-close="product-form-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Business Form Modal (Register / Edit) -->
+  <div id="business-form-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">MERCHANT ENTITY</span>
+          <h2 class="modal-title" id="business-form-title">Register Business</h2>
+        </div>
+        <button class="modal-close-btn" data-close="business-form-modal">✕</button>
+      </div>
+      <form id="business-form" class="modal-body">
+        <input type="hidden" id="business-form-id">
+        <div class="form-grid">
+          <div class="form-group full-col">
+            <label class="form-label">Business / Store Name *</label>
+            <input type="text" id="business-form-name" class="input-field" required placeholder="e.g. Fresh Bites Bakery">
+          </div>
+          <div class="form-group full-col">
+            <label class="form-label">Store Description</label>
+            <textarea id="business-form-desc" class="textarea-field" rows="2" placeholder="Local organic bakery in Vellore…"></textarea>
+          </div>
+          <div class="form-group full-col">
+            <label class="form-label">Store Owner (User) *</label>
+            <select id="business-form-owner" class="select-field" required></select>
+          </div>
+          <div class="form-group full-col">
+            <label class="form-label">Street Address *</label>
+            <input type="text" id="business-form-address" class="input-field" required placeholder="12 Gandhi Road">
+          </div>
+          <div class="form-group">
+            <label class="form-label">City *</label>
+            <input type="text" id="business-form-city" class="input-field" required placeholder="Vellore">
+          </div>
+          <div class="form-group">
+            <label class="form-label">State *</label>
+            <input type="text" id="business-form-state" class="input-field" required placeholder="Tamil Nadu">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Postal Code *</label>
+            <input type="text" id="business-form-postal" class="input-field" required placeholder="632004">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact Phone *</label>
+            <input type="text" id="business-form-phone" class="input-field" required placeholder="9876543210">
+          </div>
+        </div>
+        <div class="modal-footer mt-6">
+          <button type="button" class="btn btn-ghost" data-close="business-form-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Business</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Category Form Modal -->
+  <div id="category-form-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">TAXONOMY</span>
+          <h2 class="modal-title" id="category-form-title">Add Category</h2>
+        </div>
+        <button class="modal-close-btn" data-close="category-form-modal">✕</button>
+      </div>
+      <form id="category-form" class="modal-body">
+        <input type="hidden" id="category-form-id">
+        <div class="form-group">
+          <label class="form-label">Category Name *</label>
+          <input type="text" id="category-form-name" class="input-field" required placeholder="e.g. Organic Produce">
+        </div>
+        <div class="modal-footer mt-6">
+          <button type="button" class="btn btn-ghost" data-close="category-form-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Form Modal (Create / Edit) -->
+  <div id="user-form-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">USER PROFILE</span>
+          <h2 class="modal-title" id="user-form-title">Create User Account</h2>
+        </div>
+        <button class="modal-close-btn" data-close="user-form-modal">✕</button>
+      </div>
+      <form id="user-form" class="modal-body">
+        <input type="hidden" id="user-form-id">
+        <div class="form-grid">
+          <div class="form-group full-col">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="user-form-fullname" class="input-field" required placeholder="John Doe">
+          </div>
+          <div class="form-group full-col">
+            <label class="form-label">Email Address *</label>
+            <input type="email" id="user-form-email" class="input-field" required placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password *</label>
+            <input type="password" id="user-form-password" class="input-field" placeholder="Secret password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Account Role *</label>
+            <select id="user-form-role" class="select-field" required>
+              <option value="CUSTOMER">CUSTOMER</option>
+              <option value="SELLER">SELLER</option>
+              <option value="ADMIN">ADMIN</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" id="user-form-phone" class="input-field" placeholder="9876543210">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Default Shipping Address</label>
+            <input type="text" id="user-form-address" class="input-field" placeholder="Vellore, Tamil Nadu">
+          </div>
+        </div>
+        <div class="modal-footer mt-6">
+          <button type="button" class="btn btn-ghost" data-close="user-form-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Review Form Modal -->
+  <div id="review-form-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">FEEDBACK</span>
+          <h2 class="modal-title" id="review-form-title">Write Product Review</h2>
+        </div>
+        <button class="modal-close-btn" data-close="review-form-modal">✕</button>
+      </div>
+      <form id="review-form" class="modal-body">
+        <input type="hidden" id="review-form-id">
+        <input type="hidden" id="review-form-order-id">
+        <input type="hidden" id="review-form-product-id">
+
+        <div class="form-group mb-4">
+          <label class="form-label">Product</label>
+          <input type="text" id="review-form-product-name" class="input-field" readonly>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label">Associated Order</label>
+          <select id="review-form-order-select" class="select-field"></select>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label">Rating *</label>
+          <div class="star-rating-picker" id="star-picker">
+            <button type="button" class="star-btn" data-value="1">★</button>
+            <button type="button" class="star-btn" data-value="2">★</button>
+            <button type="button" class="star-btn" data-value="3">★</button>
+            <button type="button" class="star-btn" data-value="4">★</button>
+            <button type="button" class="star-btn active" data-value="5">★</button>
+            <span id="star-rating-label" class="star-rating-label">5.0 - Excellent</span>
+          </div>
+          <input type="hidden" id="review-form-rating" value="5">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Customer Comment</label>
+          <textarea id="review-form-comment" class="textarea-field" rows="3" placeholder="Share your experience with freshness, quality, and packaging…"></textarea>
+        </div>
+
+        <div class="modal-footer mt-6">
+          <button type="button" class="btn btn-ghost" data-close="review-form-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Status Update Modal -->
+  <div id="order-status-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">ORDER FULFILLMENT</span>
+          <h2 class="modal-title">Update Order Status</h2>
+        </div>
+        <button class="modal-close-btn" data-close="order-status-modal">✕</button>
+      </div>
+      <form id="order-status-form" class="modal-body">
+        <input type="hidden" id="order-status-id">
+        <div class="form-group mb-4">
+          <label class="form-label">Order Reference</label>
+          <input type="text" id="order-status-ref" class="input-field" readonly>
+        </div>
+        <div class="form-group mb-4">
+          <label class="form-label">Current Status</label>
+          <select id="order-status-select" class="select-field full-width">
+            <option value="PENDING">PENDING</option>
+            <option value="PROCESSING">PROCESSING</option>
+            <option value="SHIPPED">SHIPPED</option>
+            <option value="DELIVERED">DELIVERED</option>
+            <option value="CANCELLED">CANCELLED</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Shipping Address</label>
+          <textarea id="order-status-address" class="textarea-field" rows="2"></textarea>
+        </div>
+        <div class="modal-footer mt-6">
+          <button type="button" class="btn btn-ghost" data-close="order-status-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Status</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Item Modal (Admin) -->
+  <div id="order-item-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">ORDER LINE ITEM</span>
+          <h2 class="modal-title" id="order-item-modal-title">Add Order Item</h2>
+        </div>
+        <button class="modal-close-btn" data-close="order-item-modal">✕</button>
+      </div>
+      <form id="order-item-form" class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Order *</label>
+            <select id="order-item-form-order" class="select-field" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Product *</label>
+            <select id="order-item-form-product" class="select-field" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Quantity *</label>
+            <input type="number" id="order-item-form-qty" class="input-field" min="1" value="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Unit Price (₹) *</label>
+            <input type="number" id="order-item-form-price" class="input-field" step="0.01" min="0" required>
+          </div>
+        </div>
+        <div class="modal-footer mt-6">
+          <button type="button" class="btn btn-ghost" data-close="order-item-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Availability Quick Checker Modal -->
+  <div id="availability-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">SQL VIEW: product_availability</span>
+          <h2 class="modal-title">Check Real-Time Product Availability</h2>
+        </div>
+        <button class="modal-close-btn" data-close="availability-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="muted mb-4">Direct test of <code>/api/search/products?name={name}&amp;city={city}</code> running against the database view with ratings and availability status.</p>
+        <div class="form-grid mb-4">
+          <div class="form-group">
+            <label class="form-label">Product Keyword</label>
+            <input type="text" id="avail-keyword-input" class="input-field" placeholder="e.g. Cake, Bread, Candle" value="Cake">
+          </div>
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" id="avail-city-input" class="input-field" placeholder="e.g. Vellore" value="Vellore">
+          </div>
+        </div>
+        <button class="btn btn-primary full-btn mb-6" id="avail-search-btn">Search Availability View</button>
+        <div id="avail-results-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <div class="brand">
+          <span class="brand-badge">LM</span>
+          <span class="brand-text">Local<strong>Market</strong></span>
+        </div>
+        <p class="footer-desc">A full-stack hyperlocal marketplace application built on Spring Boot, PostgreSQL, and modern responsive frontend engineering.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <strong>Architecture</strong>
+          <span>Spring Boot 3.x</span>
+          <span>PostgreSQL 18</span>
+          <span>JDBC Procedures</span>
+          <span>SQL Projections</span>
+        </div>
+        <div>
+          <strong>APIs Covered</strong>
+          <span>Users &amp; Roles</span>
+          <span>Products &amp; Carts</span>
+          <span>Orders &amp; Items</span>
+          <span>5 BI Reports</span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 LocalMarket. All endpoints, views, and DTOs connected.</span>
+      <span class="backend-badge"><span class="live-dot"></span> Backend: http://localhost:8080 (Online)</span>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
